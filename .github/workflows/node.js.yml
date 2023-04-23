@@ -9,20 +9,16 @@ on:
 
 jobs:
   build:
-
-    runs-on: self-hosted
-
-    strategy:
-      matrix:
-        node-version: [18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+    - name: executing remote ssh commands
+      uses: appleboy/ssh-action@v0.1.8
       with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
+        host: 34.227.171.171
+        username: ubuntu
+        key: ${{ secrets.SSH_PVT_KEY }}
+        port: 22
+        script: |
+                cd /home/ubuntu
+                bash deploy.sh
