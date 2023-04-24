@@ -17,7 +17,6 @@ jobs:
       with:
         host: 3.80.146.109
         username: ubuntu
-        echo: ${{secrets.SSH_PVT_KEY}} 
         key: ${{secrets.SSH_PVT_KEY}}
         port: 22
         script: |
