@@ -20,5 +20,10 @@ jobs:
         key: ${{secrets.SSH_PVT_KEY}}
         port: 22
         script: |
-                cd /home/ubuntu
-                bash deploy.sh
+                cd /home/ubuntu/next-test
+                git pull origin main 
+                npm install 
+                npm run build
+                pm2 restart next
+                
+                
