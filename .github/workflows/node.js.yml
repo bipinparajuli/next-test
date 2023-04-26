@@ -15,10 +15,15 @@ jobs:
     - name: executing remote ssh commands
       uses: appleboy/ssh-action@v0.1.8
       with:
-        host: 3.80.146.109
+        host: 18.209.11.110
         username: ubuntu
         key: ${{secrets.SSH_PVT_KEY}}
         port: 22
         script: |
-                cd /home/ubuntu
-                bash deploy.sh
+                cd /home/ubuntu/next-test
+                git pull origin main 
+                npm install 
+                npm run build
+                pm2 restart next
+                
+                
